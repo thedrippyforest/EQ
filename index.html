@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>民族EQ志工中心</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero" id="home">
+        <span class="tag">民族國小 EQ 志工組</span>
+        <h1>給想陪孩子一起成長的你</h1>
+        <p>一起走進教室，陪伴孩子學習情緒與人際互動的能力。</p>
+        <div class="quote">把情緒教育帶進班級，讓陪伴更有方法。</div>
+
+      </header>
+
+      <nav class="nav" aria-label="網站導覽">
+        <button class="nav-link active" data-page-target="about">EQ理念與加入流程</button>
+        <button class="nav-link" data-page-target="training">培訓報名</button>
+        <button class="nav-link" data-page-target="support">入班協助</button>
+        <button class="nav-link" data-page-target="teachers">老師專用</button>
+      </nav>
+
+      <main>
+        <section id="about" class="page active">
+          <section class="section">
+            <h2>EQ 組理念與服務介紹</h2>
+            <div class="grid">
+              <div class="card">
+                <h3>芯福里情緒教育</h3>
+                <p>提供一至六年級 EQ/SEL 課程，透過故事、遊戲與生活情境，陪孩子學習情緒管理、自我認識與人際互動。</p>
+              </div>
+              <div class="card">
+                <h3>志工能獲得什麼？</h3>
+                <p>學習情緒引導技巧與有效溝通語言，也在陪伴孩子的過程中，讓親子關係更靠近一點。</p>
+              </div>
+              <div class="card">
+                <h3>我們需要你</h3>
+                <p>不一定一開始就要成為主講，從備課、入班協助、觀課開始，都能慢慢累積經驗。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>完整加入流程</h2>
+            <div class="steps">
+              <div class="step"><div class="num">1</div><strong>填寫培訓報名</strong><span class="pill">選擇培訓課程</span></div>
+              <div class="step"><div class="num">2</div><strong>完成匯款確認</strong><span class="pill">回填末五碼</span></div>
+              <div class="step"><div class="num">3</div><strong>參加培訓共備</strong><span class="pill">督導帶領演練</span></div>
+              <div class="step"><div class="num">4</div><strong>入班協助服務</strong><span class="pill">依班表登記</span></div>
+            </div>
+            <div class="notice">完成培訓後，依協會規定參與入班服務時數；中低年級 12 小時、高年級 8 小時，作為保證金退費條件之一。</div>
+          </section>
+        </section>
+
+        <section id="training" class="page">
+          <section class="section">
+            <h2>培訓報名</h2>
+            <div class="formgrid">
+              <div class="card">
+                <h3>報名資料內容</h3>
+                <p>請填寫姓名、手機、Google 帳號、Line ID、小孩年級/姓名、培訓課程、同意書勾選、教案課本需求與匯款末五碼。</p>
+                <details>
+                  <summary>匯款資訊</summary>
+                  <p>培訓課費用：$2000<br>銀行：華南銀行 008<br>帳號：126200762281<br>戶名：葉怡君（EQ組公用帳號）</p>
+                  <p class="mini">備註欄請寫匯款人姓名，或轉帳後填寫帳號末五碼。</p>
+                </details>
+              </div>
+              <div class="iframebox tall">
+                <iframe
+                  title="EQ新進/舊有志工培訓報名表"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSfhvUz8RLU-AQyVmRdTyckbaDUwpH-QN31TalcbUfIiBZ2A6g/viewform?embedded=true"
+                >載入中…</iframe>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="support" class="page">
+          <section class="section">
+            <h2>入班協助</h2>
+            <p class="mini">點選想支援的時段，輸入姓名即可登記，如有臨時不能加入的時段，請洽EQ組幹部(Vivi, 茂玲, 雅禎)更新資料，謝謝</p>
+
+            <div class="notice backend-warning" id="backendWarning">
+              目前尚未填入 Apps Script Web App URL。介面可以操作，但送出前需要先完成後台部署。
+            </div>
+
+            <div class="schedule-toolbar">
+              <a class="btn secondary" href="https://docs.google.com/spreadsheets/d/15b6Ximi0_dSC8yaNMzyVRZhM4OvJgUNaH1unGUiV9KI/edit?usp=sharing" target="_blank" rel="noreferrer">查看雲端班表</a>
+              <button class="btn secondary" id="loadLatestScheduleBtn" type="button">載入最新資料</button>
+              <span class="mini schedule-status" id="scheduleStatus" aria-live="polite"></span>
+              <div class="month-switcher" aria-label="切換月份">
+                <button class="btn secondary" id="prevMonthBtn" type="button">上一月</button>
+                <strong id="currentMonthLabel">本月</strong>
+                <button class="btn secondary" id="nextMonthBtn" type="button">下一月</button>
+              </div>
+            </div>
+
+            <div id="scheduleList" class="list"></div>
+          </section>
+        </section>
+
+        <section id="teachers" class="page">
+          <section class="section">
+            <h2>老師專用</h2>
+            <div id="teacherLock" class="card lock-card">
+              <h3>請輸入老師專用密碼</h3>
+              <p>此區放置老師入班調查表與 115 學年度上學期主講分配。</p>
+              <div class="password-row">
+                <input id="teacherPassword" type="password" placeholder="請輸入密碼" autocomplete="current-password" />
+                <button class="btn" id="unlockTeacherBtn">進入</button>
+              </div>
+              <p class="mini" id="teacherError" aria-live="polite"></p>
+            </div>
+
+            <div id="teacherContent" class="locked-content" hidden>
+              <div class="teacher-form-only">
+                <div class="iframebox tall">
+                  <iframe
+                    title="EQ教師入班意願調查表"
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSeqiM80X17ZZjLDSGHGyIQtb0C_dG9q3N-nhVlE8qAztH9E3g/viewform?embedded=true"
+                  >載入中…</iframe>
+                </div>
+              </div>
+
+              <div class="table-scroll">
+                <table class="table">
+                  <thead>
+                    <tr><th>年級</th><th>班級</th><th>導師</th><th>主講</th><th>狀態</th></tr>
+                  </thead>
+                  <tbody id="teacherTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <div class="modal" id="registerModal" hidden>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <button class="modal-close" id="closeModalBtn" aria-label="關閉">×</button>
+          <span class="tag">入班協助登記</span>
+          <h2 id="modalTitle">登記時段</h2>
+          <p id="modalSlotInfo" class="mini"></p>
+          <label for="volunteerName">姓名</label>
+          <input id="volunteerName" type="text" placeholder="請輸入姓名" />
+          <input id="volunteerPhone" type="text" inputmode="numeric" maxlength="3" placeholder="手機末三碼（可不填）" />
+          <textarea id="volunteerNote" rows="3" placeholder="備註（可不填）"></textarea>
+          <button class="btn" id="submitRegistrationBtn">送出登記</button>
+          <p class="mini" id="registrationStatus" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="footer">民族志工團 EQ 組</div>
+    </div>
+
+    <script>
+      const SUPPORT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwC8SdE1ZuL9wQ7QtgvB_deqbC7tFU-Iojis8ZqJ4XOX5WEmRERF121LZcj_FHX5JoI/exec";
+
+      let scheduleSlots = [
+        { id: "PREP-1142-0304-G1", type: "一起備課", date: "3/4", weekday: "三", time: "10:00-12:00", start: "2026-03-04T10:00:00+08:00", end: "2026-03-04T12:00:00+08:00", title: "一年級備課", detail: "我是心情魔法師(下) 1、2｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0305-G4", type: "一起備課", date: "3/5", weekday: "四", time: "09:30-12:00", start: "2026-03-05T09:30:00+08:00", end: "2026-03-05T12:00:00+08:00", title: "四年級備課", detail: "超人氣養成班(下) 1、2｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0311-G5", type: "一起備課", date: "3/11", weekday: "三", time: "09:00-12:00", start: "2026-03-11T09:00:00+08:00", end: "2026-03-11T12:00:00+08:00", title: "五年級 SC（一）備課", detail: "SC(一)｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0312-G3", type: "一起備課", date: "3/12", weekday: "四", time: "09:30-12:00", start: "2026-03-12T09:30:00+08:00", end: "2026-03-12T12:00:00+08:00", title: "三年級備課", detail: "好人氣養成班(下) 1、2｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0325-G2", type: "一起備課", date: "3/25", weekday: "三", time: "10:00-12:00", start: "2026-03-25T10:00:00+08:00", end: "2026-03-25T12:00:00+08:00", title: "二年級備課", detail: "我是幸福魔法師(下) 1、2｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0326-G4", type: "一起備課", date: "3/26", weekday: "四", time: "09:30-12:00", start: "2026-03-26T09:30:00+08:00", end: "2026-03-26T12:00:00+08:00", title: "四年級備課", detail: "超人氣養成班(下) 3、4｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0408-G5", type: "一起備課", date: "4/8", weekday: "三", time: "09:00-12:00", start: "2026-04-08T09:00:00+08:00", end: "2026-04-08T12:00:00+08:00", title: "五年級 SC（二）備課", detail: "SC(二)｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0429-G1", type: "一起備課", date: "4/29", weekday: "三", time: "10:00-12:00", start: "2026-04-29T10:00:00+08:00", end: "2026-04-29T12:00:00+08:00", title: "一年級備課", detail: "我是心情魔法師(下) 3、4｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0506-G5", type: "一起備課", date: "5/6", weekday: "三", time: "09:00-12:00", start: "2026-05-06T09:00:00+08:00", end: "2026-05-06T12:00:00+08:00", title: "五年級 SC（三）備課", detail: "SC(三)｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0507-G4", type: "一起備課", date: "5/7", weekday: "四", time: "13:30-16:00", start: "2026-05-07T13:30:00+08:00", end: "2026-05-07T16:00:00+08:00", title: "四年級備課", detail: "超人氣養成班(下) 5、6｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0508-G2", type: "一起備課", date: "5/8", weekday: "五", time: "10:00-12:00", start: "2026-05-08T10:00:00+08:00", end: "2026-05-08T12:00:00+08:00", title: "二年級備課", detail: "我是幸福魔法師(下) 3、4｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0515-G3", type: "一起備課", date: "5/15", weekday: "五", time: "09:30-12:00", start: "2026-05-15T09:30:00+08:00", end: "2026-05-15T12:00:00+08:00", title: "三年級備課", detail: "好人氣養成班(下) 3、4｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0605-G5", type: "一起備課", date: "6/5", weekday: "五", time: "09:00-12:00", start: "2026-06-05T09:00:00+08:00", end: "2026-06-05T12:00:00+08:00", title: "五年級 SC（四）備課", detail: "SC(四)｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0610-G2", type: "一起備課", date: "6/10", weekday: "三", time: "10:00-12:00", start: "2026-06-10T10:00:00+08:00", end: "2026-06-10T12:00:00+08:00", title: "二年級備課", detail: "我是幸福魔法師(下) 5、6｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0617-G1", type: "一起備課", date: "6/17", weekday: "三", time: "10:00-12:00", start: "2026-06-17T10:00:00+08:00", end: "2026-06-17T12:00:00+08:00", title: "一年級備課", detail: "我是心情魔法師(下) 5、6｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "PREP-1142-0618-G3", type: "一起備課", date: "6/18", weekday: "四", time: "09:30-12:00", start: "2026-06-18T09:30:00+08:00", end: "2026-06-18T12:00:00+08:00", title: "三年級備課", detail: "好人氣養成班(下) 5、6｜家長會辦公室", classes: "主講/旁聽夥伴" },
+        { id: "CLASS-1142-0309-G4-402", type: "入班協助", date: "3/9", weekday: "一", time: "13:20-14:50", start: "2026-03-09T13:20:00+08:00", end: "2026-03-09T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第1~2課）", classes: "402" },
+        { id: "CLASS-1142-0310-G1-101104", type: "入班協助", date: "3/10", weekday: "二", time: "13:20-14:50", start: "2026-03-10T13:20:00+08:00", end: "2026-03-10T14:50:00+08:00", title: "一年級入班", detail: "我是心情魔法師（第1~2課）", classes: "101 / 102 / 103 / 104" },
+        { id: "CLASS-1142-0312-G4-406", type: "入班協助", date: "3/12", weekday: "四", time: "13:20-14:50", start: "2026-03-12T13:20:00+08:00", end: "2026-03-12T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第1~2課）", classes: "406" },
+        { id: "CLASS-1142-0316-G5-501505", type: "入班協助", date: "3/16", weekday: "一", time: "13:20-14:50", start: "2026-03-16T13:20:00+08:00", end: "2026-03-16T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯（一）", classes: "501 / 505" },
+        { id: "CLASS-1142-0319-G3-301302305", type: "入班協助", date: "3/19", weekday: "四", time: "13:20-14:50", start: "2026-03-19T13:20:00+08:00", end: "2026-03-19T14:50:00+08:00", title: "三年級入班", detail: "好人氣養成班（第1~2課）", classes: "301 / 302 / 305" },
+        { id: "CLASS-1142-0319-G4-401403", type: "入班協助", date: "3/19", weekday: "四", time: "13:20-14:50", start: "2026-03-19T13:20:00+08:00", end: "2026-03-19T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第1~2課）", classes: "401 / 403" },
+        { id: "CLASS-1142-0323-G5-504", type: "入班協助", date: "3/23", weekday: "一", time: "13:20-14:50", start: "2026-03-23T13:20:00+08:00", end: "2026-03-23T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯（一）", classes: "504" },
+        { id: "CLASS-1142-0330-G5-502", type: "入班協助", date: "3/30", weekday: "一", time: "13:20-14:50", start: "2026-03-30T13:20:00+08:00", end: "2026-03-30T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯（一）", classes: "502" },
+        { id: "CLASS-1142-0331-G2-202205", type: "入班協助", date: "3/31", weekday: "二", time: "14:10-15:50", start: "2026-03-31T14:10:00+08:00", end: "2026-03-31T15:50:00+08:00", title: "二年級入班", detail: "我是幸福魔法師（第1~2課）", classes: "202 / 203 / 204 / 205" },
+        { id: "CLASS-1142-0409-G4-403", type: "入班協助", date: "4/9", weekday: "四", time: "13:20-14:50", start: "2026-04-09T13:20:00+08:00", end: "2026-04-09T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第3~4課）", classes: "403" },
+        { id: "CLASS-1142-0413-G4-402", type: "入班協助", date: "4/13", weekday: "一", time: "10:30-12:00", start: "2026-04-13T10:30:00+08:00", end: "2026-04-13T12:00:00+08:00", title: "四年級入班", detail: "超人氣養成班（第3~4課）", classes: "402" },
+        { id: "CLASS-1142-0413-G5-501502504505", type: "入班協助", date: "4/13", weekday: "一", time: "13:20-14:50", start: "2026-04-13T13:20:00+08:00", end: "2026-04-13T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯", classes: "501 / 502 / 504 / 505" },
+        { id: "CLASS-1142-0423-G4-401406", type: "入班協助", date: "4/23", weekday: "四", time: "13:20-14:50", start: "2026-04-23T13:20:00+08:00", end: "2026-04-23T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第3~4課）", classes: "401 / 406" },
+        { id: "CLASS-1142-0505-G1-102104", type: "入班協助", date: "5/5", weekday: "二", time: "13:20-14:50", start: "2026-05-05T13:20:00+08:00", end: "2026-05-05T14:50:00+08:00", title: "一年級入班", detail: "我是心情魔法師（第3~4課）", classes: "102 / 103 / 104" },
+        { id: "CLASS-1142-0505-G1-101", type: "入班協助", date: "5/5", weekday: "二", time: "14:10-15:50", start: "2026-05-05T14:10:00+08:00", end: "2026-05-05T15:50:00+08:00", title: "一年級入班", detail: "我是心情魔法師（第3~4課）", classes: "101" },
+        { id: "CLASS-1142-0505-G2-201", type: "入班協助", date: "5/5", weekday: "二", time: "14:10-15:50", start: "2026-05-05T14:10:00+08:00", end: "2026-05-05T15:50:00+08:00", title: "二年級入班", detail: "我是幸福魔法師（第1~2課）", classes: "201" },
+        { id: "CLASS-1142-0511-G5-501502504", type: "入班協助", date: "5/11", weekday: "一", time: "13:20-14:50", start: "2026-05-11T13:20:00+08:00", end: "2026-05-11T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯（三）", classes: "501 / 502 / 504" },
+        { id: "CLASS-1142-0512-G2-201205", type: "入班協助", date: "5/12", weekday: "二", time: "14:10-15:50", start: "2026-05-12T14:10:00+08:00", end: "2026-05-12T15:50:00+08:00", title: "二年級入班", detail: "我是幸福魔法師（第3~4課）", classes: "201 / 202 / 203 / 204 / 205" },
+        { id: "CLASS-1142-0514-G4-403", type: "入班協助", date: "5/14", weekday: "四", time: "13:20-14:50", start: "2026-05-14T13:20:00+08:00", end: "2026-05-14T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第5~6課）", classes: "403" },
+        { id: "CLASS-1142-0521-G3-301302305", type: "入班協助", date: "5/21", weekday: "四", time: "13:20-14:50", start: "2026-05-21T13:20:00+08:00", end: "2026-05-21T14:50:00+08:00", title: "三年級入班", detail: "好人氣養成班（第3~4課）", classes: "301 / 302 / 305" },
+        { id: "CLASS-1142-0521-G4-401", type: "入班協助", date: "5/21", weekday: "四", time: "14:10-15:50", start: "2026-05-21T14:10:00+08:00", end: "2026-05-21T15:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第5~6課）", classes: "401" },
+        { id: "CLASS-1142-0525-G5-504505", type: "入班協助", date: "5/25", weekday: "一", time: "13:20-14:50", start: "2026-05-25T13:20:00+08:00", end: "2026-05-25T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯（四）", classes: "504 / 505" },
+        { id: "CLASS-1142-0604-G4-402406", type: "入班協助", date: "6/4", weekday: "四", time: "13:20-14:50", start: "2026-06-04T13:20:00+08:00", end: "2026-06-04T14:50:00+08:00", title: "四年級入班", detail: "超人氣養成班（第5~6課）", classes: "402 / 406" },
+        { id: "CLASS-1142-0608-G5-502505", type: "入班協助", date: "6/8", weekday: "一", time: "13:20-14:50", start: "2026-06-08T13:20:00+08:00", end: "2026-06-08T14:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯", classes: "502 / 505" },
+        { id: "CLASS-1142-0616-G2-201205", type: "入班協助", date: "6/16", weekday: "二", time: "14:10-15:50", start: "2026-06-16T14:10:00+08:00", end: "2026-06-16T15:50:00+08:00", title: "二年級入班", detail: "我是幸福魔法師（第5~6課）", classes: "201 / 202 / 203 / 204 / 205" },
+        { id: "CLASS-1142-0622-G5-501", type: "入班協助", date: "6/22", weekday: "一", time: "14:10-15:50", start: "2026-06-22T14:10:00+08:00", end: "2026-06-22T15:50:00+08:00", title: "五年級入班", detail: "我是EQ高手 / 我真的很不錯（四）", classes: "501" },
+        { id: "CLASS-1142-0623-G1-101104", type: "入班協助", date: "6/23", weekday: "二", time: "13:20-14:50", start: "2026-06-23T13:20:00+08:00", end: "2026-06-23T14:50:00+08:00", title: "一年級入班", detail: "我是心情魔法師（第5~6課）", classes: "101 / 102 / 103 / 104" },
+        { id: "CLASS-1142-0625-G3-301302305", type: "入班協助", date: "6/25", weekday: "四", time: "13:20-14:50", start: "2026-06-25T13:20:00+08:00", end: "2026-06-25T14:50:00+08:00", title: "三年級入班", detail: "好人氣養成班（第5~6課）", classes: "301 / 302 / 305" }
+      ];
+
+      const staticAssistants = {
+        "CLASS-1142-0309-G4-402": ["鄭雅禎"],
+        "CLASS-1142-0310-G1-101104": ["吳喬縈(5)", "陳昱雰"],
+        "CLASS-1142-0312-G4-406": ["劉芷伶", "黃婉婷"],
+        "CLASS-1142-0316-G5-501505": ["鄭雅禎", "戴郁芳"],
+        "CLASS-1142-0319-G3-301302305": ["吳雅惠"],
+        "CLASS-1142-0323-G5-504": [],
+        "CLASS-1142-0330-G5-502": ["張容碩"],
+        "CLASS-1142-0331-G2-202205": ["許芸蓁", "戴郁芳"],
+        "CLASS-1142-0409-G4-403": ["黃婉婷"],
+        "CLASS-1142-0413-G4-402": ["鄭雅禎"],
+        "CLASS-1142-0413-G5-501502504505": ["侯怡芸", "鄭雅禎", "戴郁芳", "陳怡蓉"],
+        "CLASS-1142-0505-G1-102104": ["張慧芳", "戴郁芳", "鄭雅禎", "侯怡芸(5)", "陳昱雰"],
+        "CLASS-1142-0505-G1-101": ["侯怡芸"],
+        "CLASS-1142-0511-G5-501502504": ["侯怡芸", "鄭雅禎"],
+        "CLASS-1142-0512-G2-201205": ["戴郁芳", "吳雅惠", "呂伯駿"],
+        "CLASS-1142-0521-G3-301302305": ["王玟嵐", "吳雅惠"],
+        "CLASS-1142-0521-G4-401": ["陳小琪"],
+        "CLASS-1142-0525-G5-504505": ["侯怡芸"],
+        "CLASS-1142-0604-G4-402406": ["鄭雅禎", "歐亭鎔"],
+        "CLASS-1142-0608-G5-502505": ["鄭雅禎", "戴郁芳"],
+        "CLASS-1142-0616-G2-201205": ["許芸蓁"],
+        "CLASS-1142-0622-G5-501": ["陳小琪"],
+        "CLASS-1142-0623-G1-101104": ["吳喬縈", "戴郁芳", "陳昱雰"],
+        "CLASS-1142-0625-G3-301302305": ["王玟嵐", "呂怡嫻", "歐亭鎔"]
+      };
+
+      const teacherRows = [
+        ["一年級", "101", "紀宏", "怡君督導", "暫定"],
+        ["一年級", "102", "張靜宜", "雅禎", "暫定"],
+        ["一年級", "103", "王俞婷", "芸蓁", "暫定"],
+        ["二年級", "201", "黃承哲", "佳蓉", "暫定"],
+        ["二年級", "202", "包康怡", "茂玲", "暫定"],
+        ["二年級", "203", "沈佳奇", "Vivi", "暫定"],
+        ["二年級", "204", "徐蓉姬", "雅惠/婉婷", "暫定"],
+        ["三年級", "301", "吳智融", "怡君督導", "暫定"],
+        ["三年級", "302", "洪德曦", "小芳", "暫定"],
+        ["三年級", "303", "沈君俞", "晴婉", "暫定"],
+        ["三年級", "304", "許敏玲", "茂玲", "暫定"],
+        ["三年級", "305", "代課", "雅禎", "暫定"],
+        ["三年級", "306", "胡馨文", "待確認", "待確認"],
+        ["四年級", "401", "王奕貞", "婉婷", "暫定"],
+        ["四年級", "402", "陳寶如", "晴婉", "暫定"],
+        ["四年級", "405", "陳弘展", "容碩", "暫定"],
+        ["五年級", "501", "林佳裕", "待確認", "待確認"],
+        ["五年級", "502", "吳彥霆", "不開課", "不開課"],
+        ["五年級", "503", "王音婷", "怡蓉/容碩", "暫定"],
+        ["五年級", "504", "潘奕炎", "Vivi/婉婷", "暫定"],
+        ["五年級", "505", "代課", "待確認", "待確認"],
+        ["五年級", "506", "代課", "待確認", "待確認"],
+        ["五年級", "507", "美術班", "待確認", "待確認"],
+        ["六年級", "601", "劉憶庭", "怡君督導", "暫定"],
+        ["六年級", "602", "王輔晨", "婉婷", "暫定"],
+        ["六年級", "604", "連慧君", "Vivi/小芳", "暫定"],
+        ["六年級", "605", "高珮瑜", "容碩", "暫定"]
+      ];
+
+      let selectedSlot = null;
+      let availableMonths = [];
+      let selectedMonthIndex = 0;
+
+      function localMonthKey() {
+        const today = new Date();
+        return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
+      }
+
+      function rebuildAvailableMonths(preferredMonth = localMonthKey()) {
+        availableMonths = [...new Set(scheduleSlots.map((slot) => slot.start.slice(0, 7)))].sort();
+        selectedMonthIndex = availableMonths.indexOf(preferredMonth);
+        if (selectedMonthIndex < 0) selectedMonthIndex = availableMonths.findIndex((month) => month > preferredMonth);
+        if (selectedMonthIndex < 0) selectedMonthIndex = Math.max(availableMonths.length - 1, 0);
+      }
+
+      function getAssistants(slot) {
+        if (Array.isArray(slot.assistants) && slot.assistants.length) return slot.assistants;
+        return staticAssistants[slot.id] || [];
+      }
+
+      function showPage(id) {
+        document.querySelectorAll(".page").forEach((page) => page.classList.toggle("active", page.id === id));
+        document.querySelectorAll("[data-page-target]").forEach((button) => button.classList.toggle("active", button.dataset.pageTarget === id));
+        history.replaceState(null, "", `#${id}`);
+        document.querySelector(".nav").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function renderSlots() {
+        const list = document.getElementById("scheduleList");
+        const month = availableMonths[selectedMonthIndex];
+        const slots = scheduleSlots.filter((slot) => slot.start.startsWith(month));
+        const label = document.getElementById("currentMonthLabel");
+        label.textContent = month ? `${Number(month.slice(5, 7))} 月` : "目前沒有班表";
+        document.getElementById("prevMonthBtn").disabled = selectedMonthIndex <= 0;
+        document.getElementById("nextMonthBtn").disabled = selectedMonthIndex >= availableMonths.length - 1;
+
+        if (!slots.length) {
+          list.innerHTML = `<div class="empty-state">這個月份目前沒有備課或入班時段。</div>`;
+          return;
+        }
+
+        const now = new Date();
+        list.innerHTML = slots.map((slot) => {
+          const ended = new Date(slot.end) <= now;
+          const assistants = getAssistants(slot);
+          const assistantLine = slot.type === "入班協助"
+            ? `<p class="assistants ${assistants.length ? "" : "empty"}"><strong>已登記：</strong>${assistants.length ? assistants.join("、") : "目前尚無協助登記"}</p>`
+            : "";
+          return `
+          <button class="slot ${ended ? "ended" : ""}" type="button" data-slot-id="${slot.id}" ${ended ? "disabled" : ""}>
+            <div class="date">${slot.date}<br>${slot.weekday}</div>
+            <div>
+              <strong>${slot.title}</strong>
+              <span class="mini">${slot.time}｜${slot.classes}</span>
+              <p>${slot.detail}</p>
+              ${assistantLine}
+            </div>
+            <span class="need">${ended ? "已結束" : slot.type}</span>
+          </button>
+        `}).join("");
+
+        list.querySelectorAll(".slot").forEach((button) => {
+          button.addEventListener("click", () => openRegisterModal(button.dataset.slotId));
+        });
+      }
+
+      function renderTeacherRows() {
+        document.getElementById("teacherTableBody").innerHTML = teacherRows.map((row) => `
+          <tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>
+        `).join("");
+      }
+
+      function openRegisterModal(slotId) {
+        selectedSlot = scheduleSlots.find((slot) => slot.id === slotId);
+        document.getElementById("modalTitle").textContent = selectedSlot.title;
+        document.getElementById("modalSlotInfo").textContent = `${selectedSlot.date}（${selectedSlot.weekday}）${selectedSlot.time}｜${selectedSlot.classes}`;
+        document.getElementById("registrationStatus").textContent = "";
+        document.getElementById("volunteerName").value = "";
+        document.getElementById("volunteerPhone").value = "";
+        document.getElementById("volunteerNote").value = "";
+        document.getElementById("registerModal").hidden = false;
+        document.getElementById("volunteerName").focus();
+      }
+
+      function closeRegisterModal() {
+        document.getElementById("registerModal").hidden = true;
+      }
+
+      async function submitRegistration() {
+        const name = document.getElementById("volunteerName").value.trim();
+        const phone = document.getElementById("volunteerPhone").value.trim();
+        const note = document.getElementById("volunteerNote").value.trim();
+        const status = document.getElementById("registrationStatus");
+
+        if (!name) {
+          status.textContent = "請先輸入姓名。";
+          return;
+        }
+
+        if (!SUPPORT_WEB_APP_URL) {
+          status.textContent = "尚未設定後台收件網址，請先部署 Apps Script Web App。";
+          return;
+        }
+
+        const payload = new URLSearchParams({
+          scheduleId: selectedSlot.id,
+          name,
+          phoneLast3: phone,
+          supportType: selectedSlot.type,
+          note
+        });
+
+        status.textContent = "送出中…";
+        try {
+          await fetch(SUPPORT_WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: payload
+          });
+          status.textContent = "已送出登記，後台主資料庫會自動更新。";
+          setTimeout(closeRegisterModal, 900);
+        } catch (error) {
+          status.textContent = "送出失敗，請稍後再試或通知 EQ 幹部。";
+        }
+      }
+
+      function loadScheduleJsonp(url) {
+        return new Promise((resolve, reject) => {
+          const callbackName = `eqScheduleCallback_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+          const script = document.createElement("script");
+          const separator = url.includes("?") ? "&" : "?";
+          const timer = setTimeout(() => {
+            cleanup();
+            reject(new Error("讀取逾時"));
+          }, 12000);
+
+          function cleanup() {
+            clearTimeout(timer);
+            delete window[callbackName];
+            script.remove();
+          }
+
+          window[callbackName] = (data) => {
+            cleanup();
+            resolve(data);
+          };
+          script.onerror = () => {
+            cleanup();
+            reject(new Error("無法讀取雲端班表"));
+          };
+          script.src = `${url}${separator}action=schedule&callback=${callbackName}`;
+          document.body.appendChild(script);
+        });
+      }
+
+      async function loadLatestSchedule() {
+        const status = document.getElementById("scheduleStatus");
+        const button = document.getElementById("loadLatestScheduleBtn");
+        const currentMonth = availableMonths[selectedMonthIndex] || localMonthKey();
+        status.textContent = "載入中...";
+        button.disabled = true;
+
+        try {
+          const data = await loadScheduleJsonp(SUPPORT_WEB_APP_URL);
+          if (!data || !data.ok || !Array.isArray(data.slots)) throw new Error("班表格式不正確");
+          scheduleSlots = data.slots;
+          rebuildAvailableMonths(currentMonth);
+          renderSlots();
+          status.textContent = `已更新 ${data.slots.length} 筆資料`;
+        } catch (error) {
+          status.textContent = "目前無法載入最新資料，請確認 Apps Script 已更新部署。";
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      document.querySelectorAll("[data-page-target]").forEach((button) => {
+        button.addEventListener("click", () => showPage(button.dataset.pageTarget));
+      });
+
+      document.getElementById("prevMonthBtn").addEventListener("click", () => {
+        if (selectedMonthIndex > 0) {
+          selectedMonthIndex -= 1;
+          renderSlots();
+        }
+      });
+      document.getElementById("nextMonthBtn").addEventListener("click", () => {
+        if (selectedMonthIndex < availableMonths.length - 1) {
+          selectedMonthIndex += 1;
+          renderSlots();
+        }
+      });
+      document.getElementById("loadLatestScheduleBtn").addEventListener("click", loadLatestSchedule);
+      document.getElementById("closeModalBtn").addEventListener("click", closeRegisterModal);
+      document.getElementById("submitRegistrationBtn").addEventListener("click", submitRegistration);
+
+      document.getElementById("unlockTeacherBtn").addEventListener("click", () => {
+        const input = document.getElementById("teacherPassword");
+        const error = document.getElementById("teacherError");
+        if (input.value === "teacher") {
+          document.getElementById("teacherLock").hidden = true;
+          document.getElementById("teacherContent").hidden = false;
+          error.textContent = "";
+        } else {
+          error.textContent = "密碼不正確，請再試一次。";
+          input.select();
+        }
+      });
+
+      document.getElementById("teacherPassword").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") document.getElementById("unlockTeacherBtn").click();
+      });
+
+      rebuildAvailableMonths();
+      renderSlots();
+      renderTeacherRows();
+      document.getElementById("backendWarning").hidden = Boolean(SUPPORT_WEB_APP_URL);
+
+      const initialPage = location.hash ? location.hash.replace("#", "") : "about";
+      if (["about", "training", "support", "teachers"].includes(initialPage)) showPage(initialPage);
+    </script>
+  </body>
+</html>
