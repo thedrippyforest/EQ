@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>民族EQ志工中心</title>
-    <link rel="stylesheet" href="./styles.css?v=20260613-2" />
+    <link rel="stylesheet" href="./styles.css?v=20260613-3" />
     <style>
       #training .formgrid,
       #training .training-stack {
@@ -132,25 +132,38 @@
 
         <section id="support" class="page">
           <section class="section">
-            <h2>入班協助</h2>
-            <p class="mini">點選想支援的時段，輸入姓名即可登記，如有臨時不能加入的時段，請洽EQ組幹部(Vivi, 茂玲, 雅禎)更新資料，謝謝</p>
-
-            <div class="notice backend-warning" id="backendWarning">
-              目前尚未填入 Apps Script Web App URL。介面可以操作，但送出前需要先完成後台部署。
-            </div>
-
-            <div class="schedule-toolbar">
-              <a class="btn secondary" href="https://docs.google.com/spreadsheets/d/15b6Ximi0_dSC8yaNMzyVRZhM4OvJgUNaH1unGUiV9KI/edit?usp=sharing" target="_blank" rel="noreferrer">查看雲端班表</a>
-              <button class="btn secondary" id="loadLatestScheduleBtn" type="button">載入最新資料</button>
-              <span class="mini schedule-status" id="scheduleStatus" aria-live="polite"></span>
-              <div class="month-switcher" aria-label="切換月份">
-                <button class="btn secondary" id="prevMonthBtn" type="button">上一月</button>
-                <strong id="currentMonthLabel">本月</strong>
-                <button class="btn secondary" id="nextMonthBtn" type="button">下一月</button>
+            <h2>志工專區</h2>
+            <div id="supportLock" class="card lock-card">
+              <h3>請輸入志工專區密碼</h3>
+              <p>此區放置入班協助登記與雲端班表資料。</p>
+              <div class="password-row">
+                <input id="supportPassword" type="password" placeholder="請輸入密碼" autocomplete="current-password" />
+                <button class="btn" id="unlockSupportBtn">進入</button>
               </div>
+              <p class="mini" id="supportError" aria-live="polite"></p>
             </div>
 
-            <div id="scheduleList" class="list"></div>
+            <div id="supportContent" class="locked-content" hidden>
+              <h2>入班協助</h2>
+              <p class="mini">點選想支援的時段，輸入姓名即可登記，如有臨時不能加入的時段，請洽EQ組幹部(Vivi, 茂玲, 雅禎)更新資料，謝謝</p>
+
+              <div class="notice backend-warning" id="backendWarning">
+                目前尚未填入 Apps Script Web App URL。介面可以操作，但送出前需要先完成後台部署。
+              </div>
+
+              <div class="schedule-toolbar">
+                <a class="btn secondary" href="https://docs.google.com/spreadsheets/d/15b6Ximi0_dSC8yaNMzyVRZhM4OvJgUNaH1unGUiV9KI/edit?usp=sharing" target="_blank" rel="noreferrer">查看雲端班表</a>
+                <button class="btn secondary" id="loadLatestScheduleBtn" type="button">載入最新資料</button>
+                <span class="mini schedule-status" id="scheduleStatus" aria-live="polite"></span>
+                <div class="month-switcher" aria-label="切換月份">
+                  <button class="btn secondary" id="prevMonthBtn" type="button">上一月</button>
+                  <strong id="currentMonthLabel">本月</strong>
+                  <button class="btn secondary" id="nextMonthBtn" type="button">下一月</button>
+                </div>
+              </div>
+
+              <div id="scheduleList" class="list"></div>
+            </div>
           </section>
         </section>
 
@@ -518,6 +531,23 @@
       document.getElementById("loadLatestScheduleBtn").addEventListener("click", loadLatestSchedule);
       document.getElementById("closeModalBtn").addEventListener("click", closeRegisterModal);
       document.getElementById("submitRegistrationBtn").addEventListener("click", submitRegistration);
+
+      document.getElementById("unlockSupportBtn").addEventListener("click", () => {
+        const input = document.getElementById("supportPassword");
+        const error = document.getElementById("supportError");
+        if (input.value === "EQ") {
+          document.getElementById("supportLock").hidden = true;
+          document.getElementById("supportContent").hidden = false;
+          error.textContent = "";
+        } else {
+          error.textContent = "密碼不正確，請再試一次。";
+          input.select();
+        }
+      });
+
+      document.getElementById("supportPassword").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") document.getElementById("unlockSupportBtn").click();
+      });
 
       document.getElementById("unlockTeacherBtn").addEventListener("click", () => {
         const input = document.getElementById("teacherPassword");
