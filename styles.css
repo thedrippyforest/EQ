@@ -880,11 +880,17 @@ tbody tr:nth-child(even) {
 
 .table-scroll .table {
   table-layout: fixed;
+  min-width: 0;
+}
+
+.table-scroll .table col {
+  width: 20%;
 }
 
 .table-scroll .table th,
 .table-scroll .table td {
-  width: 20%;
+  width: auto;
+  white-space: normal;
 }
 
 .password-row {
