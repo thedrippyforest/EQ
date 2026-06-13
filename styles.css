@@ -878,6 +878,15 @@ tbody tr:nth-child(even) {
   background: var(--white);
 }
 
+.table-scroll .table {
+  table-layout: fixed;
+}
+
+.table-scroll .table th,
+.table-scroll .table td {
+  width: 20%;
+}
+
 .password-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
