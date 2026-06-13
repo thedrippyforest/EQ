@@ -953,11 +953,16 @@ tbody tr:nth-child(even) {
 }
 
 .training-stack {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .training-stack > * {
   width: 100%;
+  min-width: 0;
+}
+
+#training .formgrid {
+  grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .iframebox {

@@ -4,7 +4,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>民族EQ志工中心</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260613-2" />
+    <style>
+      #training .formgrid,
+      #training .training-stack {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 14px;
+      }
+
+      #training .formgrid > *,
+      #training .training-stack > * {
+        width: 100%;
+        min-width: 0;
+      }
+
+      #training .iframebox iframe {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <div class="wrap">
